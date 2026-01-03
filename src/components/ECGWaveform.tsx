@@ -81,7 +81,7 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
         </div>
       )}
       
-      <div className="relative h-28 w-full rounded-xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+      <div className="relative h-28 w-full rounded-xl overflow-hidden bg-gradient-to-br from-secondary/15 to-primary/10">
         {/* Grid lines */}
         <svg className="absolute inset-0 w-full h-full opacity-20">
           {[...Array(5)].map((_, i) => (
@@ -112,9 +112,9 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
         <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ecgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="hsl(199, 89%, 48%)" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="hsl(172, 66%, 50%)" stopOpacity="1" />
-              <stop offset="100%" stopColor="hsl(142, 70%, 45%)" stopOpacity="1" />
+              <stop offset="0%" stopColor="hsl(0, 85%, 55%)" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="hsl(340, 80%, 50%)" stopOpacity="1" />
+              <stop offset="100%" stopColor="hsl(210, 100%, 55%)" stopOpacity="1" />
             </linearGradient>
             <filter id="ecgGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="3" result="coloredBlur"/>

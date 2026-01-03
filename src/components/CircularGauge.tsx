@@ -106,9 +106,9 @@ const CircularGauge = ({
         {/* Progress circle with gradient */}
         <defs>
           <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(199, 89%, 48%)" />
-            <stop offset="50%" stopColor="hsl(172, 66%, 50%)" />
-            <stop offset="100%" stopColor="hsl(142, 70%, 45%)" />
+            <stop offset="0%" stopColor="hsl(0, 85%, 55%)" />
+            <stop offset="50%" stopColor="hsl(340, 80%, 50%)" />
+            <stop offset="100%" stopColor="hsl(210, 100%, 55%)" />
           </linearGradient>
           <filter id="gaugeGlow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
