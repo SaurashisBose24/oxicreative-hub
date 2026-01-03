@@ -103,21 +103,24 @@ const Index = () => {
                   <Button
                     onClick={handleMeasure}
                     disabled={!isConnected}
-                    variant="measure"
                     size="lg"
-                    className="mt-8 min-w-[280px] group relative overflow-hidden"
+                    className={`mt-8 min-w-[280px] group relative overflow-hidden rounded-full px-10 py-6 font-semibold text-lg shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 ${
+                      isMeasuring 
+                        ? "bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 text-white animate-pulse shadow-[0_0_30px_rgba(239,68,68,0.5)]" 
+                        : "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-[0_0_30px_rgba(20,184,166,0.4)] hover:shadow-[0_0_40px_rgba(20,184,166,0.6)]"
+                    }`}
                   >
                     <Activity 
-                      className={`w-5 h-5 mr-2 transition-transform duration-300 ${
-                        isMeasuring ? "animate-pulse" : "group-hover:scale-110"
+                      className={`w-6 h-6 mr-3 transition-transform duration-300 ${
+                        isMeasuring ? "animate-heartbeat" : "group-hover:scale-110"
                       }`} 
                     />
                     <span>{isMeasuring ? "Measuring... Tap to Stop" : "Start Measurement"}</span>
                     
                     {/* Shimmer effect */}
-                    {!isMeasuring && !(!isConnected) && (
+                    {!isMeasuring && isConnected && (
                       <div className="absolute inset-0 rounded-full overflow-hidden">
-                        <div className="absolute inset-0 animate-shimmer opacity-50" />
+                        <div className="absolute inset-0 animate-shimmer opacity-30" />
                       </div>
                     )}
                   </Button>

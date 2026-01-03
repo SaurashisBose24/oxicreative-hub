@@ -66,23 +66,20 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
     : "";
 
   return (
-    <div className="w-full bg-card rounded-2xl shadow-card border border-border/50 p-6 overflow-hidden">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-medium text-muted-foreground">ECG Waveform</span>
-        {heartRate && (
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-destructive"></span>
-            </span>
-            <span className="text-sm font-bold text-destructive">{heartRate} BPM</span>
-          </div>
-        )}
-      </div>
+    <div className="w-full bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-500 rounded-2xl shadow-lg p-6 overflow-hidden">
+      {heartRate && (
+        <div className="flex items-center justify-end gap-2 mb-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+          <span className="text-sm font-bold text-white">{heartRate} BPM</span>
+        </div>
+      )}
       
       <div className="relative h-24 w-full">
         {/* Grid lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-10">
+        <svg className="absolute inset-0 w-full h-full opacity-20">
           {[...Array(5)].map((_, i) => (
             <line
               key={`h-${i}`}
@@ -90,7 +87,7 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
               y1={i * 25}
               x2="100%"
               y2={i * 25}
-              stroke="currentColor"
+              stroke="white"
               strokeWidth="1"
             />
           ))}
@@ -101,7 +98,7 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
               y1="0"
               x2={i * 5 + "%"}
               y2="100%"
-              stroke="currentColor"
+              stroke="white"
               strokeWidth="1"
             />
           ))}
@@ -111,12 +108,12 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
         <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ecgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="hsl(0, 84%, 60%)" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="hsl(0, 84%, 60%)" stopOpacity="1" />
-              <stop offset="100%" stopColor="hsl(0, 84%, 60%)" stopOpacity="1" />
+              <stop offset="0%" stopColor="white" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="white" stopOpacity="1" />
+              <stop offset="100%" stopColor="white" stopOpacity="1" />
             </linearGradient>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
               <feMerge>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
@@ -129,7 +126,7 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
               d={pathData}
               fill="none"
               stroke="url(#ecgGradient)"
-              strokeWidth="2"
+              strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
               filter="url(#glow)"
@@ -141,7 +138,7 @@ const ECGWaveform = ({ isActive, heartRate }: ECGWaveformProps) => {
         {/* Placeholder when not active */}
         {!isActive && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-muted-foreground text-sm">Start measurement to see waveform</span>
+            <span className="text-white/70 text-sm">Waiting for measurement...</span>
           </div>
         )}
       </div>
