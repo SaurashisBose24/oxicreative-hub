@@ -22,14 +22,13 @@ const CircularGauge = ({
   const [displayValue, setDisplayValue] = useState(0);
   const [progress, setProgress] = useState(0);
   
-  const size = 220;
-  const strokeWidth = 12;
+  const size = 260;
+  const strokeWidth = 14;
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   
   useEffect(() => {
     if (value !== null && !isAnimating) {
-      // Animate the value counting up
       const duration = 1500;
       const steps = 60;
       const increment = value / steps;
@@ -49,7 +48,6 @@ const CircularGauge = ({
       
       return () => clearInterval(timer);
     } else if (isAnimating) {
-      // Pulsing animation during measurement
       let angle = 0;
       const timer = setInterval(() => {
         angle += 5;
@@ -67,15 +65,15 @@ const CircularGauge = ({
     <div className="relative flex items-center justify-center">
       {/* Floating particles */}
       <div className="absolute inset-0">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-secondary/60 animate-float-particle"
+            className="absolute w-2 h-2 rounded-full bg-primary/40 animate-float-particle"
             style={{
-              left: `${20 + Math.cos((i * 60) * Math.PI / 180) * 45}%`,
-              top: `${50 + Math.sin((i * 60) * Math.PI / 180) * 45}%`,
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: `${2 + i * 0.5}s`
+              left: `${50 + Math.cos((i * 45) * Math.PI / 180) * 55}%`,
+              top: `${50 + Math.sin((i * 45) * Math.PI / 180) * 55}%`,
+              animationDelay: `${i * 0.4}s`,
+              animationDuration: `${3 + i * 0.3}s`
             }}
           />
         ))}
@@ -87,9 +85,9 @@ const CircularGauge = ({
           isAnimating ? "animate-pulse-glow" : ""
         }`}
         style={{
-          width: size + 40,
-          height: size + 40,
-          background: `radial-gradient(circle, hsl(var(--success) / 0.15) 0%, transparent 70%)`
+          width: size + 60,
+          height: size + 60,
+          background: `radial-gradient(circle, hsl(var(--primary) / 0.2) 0%, transparent 70%)`
         }}
       />
 
@@ -102,15 +100,23 @@ const CircularGauge = ({
           fill="none"
           stroke="hsl(var(--muted))"
           strokeWidth={strokeWidth}
-          className="opacity-30"
+          className="opacity-40"
         />
         
         {/* Progress circle with gradient */}
         <defs>
-          <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(142, 70%, 45%)" />
-            <stop offset="100%" stopColor="hsl(160, 80%, 40%)" />
+          <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(199, 89%, 48%)" />
+            <stop offset="50%" stopColor="hsl(172, 66%, 50%)" />
+            <stop offset="100%" stopColor="hsl(142, 70%, 45%)" />
           </linearGradient>
+          <filter id="gaugeGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
         
         <circle
@@ -123,21 +129,22 @@ const CircularGauge = ({
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
-          className="transition-all duration-300 ease-out drop-shadow-[0_0_8px_hsl(142,70%,45%,0.5)]"
+          filter="url(#gaugeGlow)"
+          className="transition-all duration-300 ease-out"
         />
       </svg>
 
       {/* Center content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <div className="flex items-baseline gap-1">
-          <span className="text-6xl font-display font-bold text-foreground tabular-nums">
+          <span className="text-7xl font-display font-bold text-foreground tabular-nums tracking-tight">
             {displayValue || "--"}
           </span>
-          <span className="text-2xl font-medium text-muted-foreground">{unit}</span>
+          <span className="text-3xl font-medium text-muted-foreground">{unit}</span>
         </div>
-        <span className="text-sm text-muted-foreground mt-1">{label}</span>
+        <span className="text-sm text-muted-foreground mt-2 uppercase tracking-wider">{label}</span>
         {status && (
-          <span className={`text-sm font-semibold mt-2 ${statusColor}`}>
+          <span className={`text-sm font-semibold mt-3 px-4 py-1 rounded-full bg-muted/50 ${statusColor}`}>
             {status}
           </span>
         )}
