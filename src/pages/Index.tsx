@@ -63,18 +63,28 @@ const Index = () => {
     <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
       {/* Background Glow Effects */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-secondary/8 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
       
       {/* Header */}
-      <header className="relative z-10 py-5 px-6 border-b border-border/30">
+      <header className="relative z-10 py-4 px-6 border-b border-border/30">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30">
-              <Activity className="w-6 h-6 text-primary-foreground" />
-            </div>
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="h-14 w-auto logo-glow rounded-xl"
+            >
+              <source src="/Oximeter-2.mp4" type="video/mp4" />
+            </video>
             <div>
-              <h1 className="font-display text-2xl font-bold text-foreground tracking-tight">VitalSync</h1>
-              <p className="text-sm text-muted-foreground">Health Monitor Pro</p>
+              <h1 className="font-display text-2xl font-bold text-foreground tracking-tight">
+                <span className="text-primary">Oxy</span>
+                <span className="text-secondary">Pulse</span>
+              </h1>
+              <p className="text-sm text-muted-foreground">Smart Health Monitor</p>
             </div>
           </div>
           <StatusIndicator isConnected={isConnected} />
@@ -128,8 +138,8 @@ const Index = () => {
                     disabled={!isConnected}
                     className={`mt-10 w-full max-w-sm group relative overflow-hidden rounded-2xl px-10 py-5 font-semibold text-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed ${
                       isMeasuring 
-                        ? "bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-[0_0_40px_rgba(239,68,68,0.4)]" 
-                        : "bg-gradient-to-r from-primary via-cyan-400 to-secondary text-primary-foreground shadow-[0_0_40px_rgba(14,165,233,0.3)] hover:shadow-[0_0_60px_rgba(14,165,233,0.5)]"
+                        ? "bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white shadow-[0_0_40px_rgba(245,158,11,0.4)]" 
+                        : "bg-gradient-to-r from-primary via-rose-500 to-pink-500 text-primary-foreground shadow-[0_0_40px_rgba(220,38,38,0.4)] hover:shadow-[0_0_60px_rgba(220,38,38,0.6)]"
                     }`}
                   >
                     <span className="flex items-center justify-center gap-3">
@@ -178,7 +188,7 @@ const Index = () => {
       <footer className="relative z-10 py-4 px-6 border-t border-border/30">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-xs text-muted-foreground">
-            VitalSync Health Monitor • For reference only, not a medical device
+            <span className="text-primary font-medium">Oxy</span><span className="text-secondary font-medium">Pulse</span> Health Monitor • For reference only, not a medical device
           </p>
         </div>
       </footer>
