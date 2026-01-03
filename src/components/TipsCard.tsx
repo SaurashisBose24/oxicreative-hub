@@ -25,10 +25,12 @@ const tips = [
 
 const TipsCard = () => {
   return (
-    <div className="bg-gradient-to-br from-card to-accent/20 rounded-2xl shadow-card border border-border/50 p-6">
+    <div className="glass-card rounded-2xl p-6">
       <h3 className="font-display font-semibold text-foreground mb-4 flex items-center gap-2">
-        <Lightbulb className="w-5 h-5 text-primary" />
-        Tips for accurate measurement
+        <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center">
+          <Lightbulb className="w-4 h-4 text-primary" />
+        </div>
+        Tips for accuracy
       </h3>
       
       <div className="space-y-3">
@@ -37,8 +39,8 @@ const TipsCard = () => {
             key={index}
             className="flex items-start gap-3 group"
           >
-            <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-secondary/20 transition-colors duration-200">
-              <tip.icon className="w-4 h-4 text-secondary" />
+            <div className="w-8 h-8 rounded-xl bg-muted/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors duration-200">
+              <tip.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {tip.text}{" "}
